@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Child Arithmetic Learning System</title>
     <link href="style/loginCSS.css" rel="stylesheet"/>
+    <script src="script.js" defer></script> <!-- Linking to a separate JavaScript file for logic -->
 </head>
 <body>
     <div class="login-container">
         <h1>Child Arithmetic Learning System</h1>
-        <form action="/login" method="POST">
-            <input type="text" name="email" placeholder="Email/User name" required><br>
-            <input type="password" name="password" placeholder="Password" required><br>
-            <input type="submit" value="Sign in">
+        <form id="loginForm">
+            <input type="email" id="email" name="email" placeholder="Email" required><br>
+            <input type="password" id="password" name="password" placeholder="Password" required><br>
+            <button type="submit" id="loginBtn">Login</button>
+            <button type="button" id="registerBtn">Register</button>
         </form>
-        <div class="register-link">
-            <a href="/register">Register here?</a>
-        </div>
+        <div class="error-message" id="errorMessage"></div>
     </div>
 </body>
 </html>
