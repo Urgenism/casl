@@ -6,6 +6,21 @@
   .btn {
     margin-top: 24px;
   }
+
+  .helper-button {
+    margin-top: 24px;
+    text-align: right;
+    font-weight: 14px;
+
+    a {
+      color: var(--clr-primary-dark);
+      transition: all 0.2s;
+
+      &:hover {
+        color: var(--clr-primary);
+      }
+    }
+  }
 }
 
 .auth-form {

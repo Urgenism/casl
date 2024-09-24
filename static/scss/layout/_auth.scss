@@ -25,7 +25,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 700px;
     background-color: var(--clr-primary);
+
+    img {
+      width: 700px;
+    }
   }
 }
