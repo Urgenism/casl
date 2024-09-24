@@ -1,2 +1,12 @@
+@import "./abstracts/variables";
+
 @import "./base/reset";
 @import "./base/base";
+@import "./base/typography";
+
+@import "./layout/auth.scss";
+
+@import "./components/form";
+@import "./components/button";
+
+@import "./pages/register";

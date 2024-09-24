@@ -1,10 +1,33 @@
 {% extends 'base.html' %} {% block title %}Login{% endblock %} {% block content
 %}
-<h2>Login</h2>
-<form method="POST">
-  {{ form.hidden_tag() }} {{ form.username.label }} {{ form.username(size=32)
-  }}<br />
-  {{ form.password.label }} {{ form.password(size=32) }}<br />
-  {{ form.submit() }}
-</form>
+
+<div class="two-screen signup">
+  <div class="two-screen__image-screen">
+    <h2 class="heading heading--1">Child Arithmetic Learning System</h2>
+    <div class="two-screen__image-wrapper">
+      <img src="{{ url_for('static', filename='images/kids-learning.jpg') }}" />
+    </div>
+  </div>
+  <div class="two-screen__form">
+    <h3 class="heading heading--2">Login</h3>
+
+    <form method="POST" class="auth-form">
+      <div class="form-control">
+        <label for="email" class="form-control__label">Email</label>
+        <input type="text" name="email" required class="form-control__input" />
+      </div>
+      <div class="form-control">
+        <label for="password" class="form-control__label">Password</label>
+        <input
+          type="password"
+          name="password"
+          required
+          class="form-control__input"
+        />
+      </div>
+
+      <input type="submit" value="Login" class="btn btn--primary" />
+    </form>
+  </div>
+</div>
 {% endblock %}

@@ -1,0 +1,30 @@
+.form-control {
+  margin-bottom: 18px;
+
+  &__label {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 15px;
+    color: var(--clr-black-light);
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: var(--clr-white);
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:focus {
+      border: 1px solid var(--clr-primary);
+      box-shadow: none;
+      outline: 0;
+    }
+  }
+}
