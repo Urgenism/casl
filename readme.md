@@ -11,7 +11,7 @@ A web-based learning platform targeted to primary school children.
   - `. .venv/bin/activate` (macOS/Linux)
   - `.venv\Scripts\activate` (Windows)
 - Install all packages
-  - `pip install Flask Flask-WTF Flask-Login libsass`
+  - `pip install Flask Flask-Login libsass mysql-connector-python python-dotenv`
 
 ## Command
 

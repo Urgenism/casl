@@ -1,0 +1,5 @@
+Flask==3.0.0
+Flask-Login==0.6.2
+mysql-connector-python==8.0.33
+python-dotenv==1.0.0
+libsass==0.20.0  # Add libsass to the requirements

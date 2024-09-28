@@ -1,17 +1,21 @@
-from database.init_db import get_db
+from database.database import get_db_connection
 
-def get_user_by_username(username):
-    db = get_db()
-    user = db.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+def insert_user(full_name, email, hashed_password, phone, user_type, class_id):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("""
+        INSERT INTO users (full_name, email, password, phone, user_type, class_id) 
+        VALUES (%s, %s, %s, %s, %s, %s)
+    """, (full_name, email, hashed_password, phone, user_type, class_id))
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+def get_user_by_email(email):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+    user = cursor.fetchone()
+    cursor.close()
+    conn.close()
     return user
-
-def get_user_by_id(user_id):
-    db = get_db()
-    user = db.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()
-    return user
-
-def create_user(username, email, password_hash):
-    db = get_db()
-    db.execute('INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)', 
-               (username, email, password_hash))
-    db.commit()
