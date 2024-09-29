@@ -4,7 +4,10 @@
 @import "./base/base";
 @import "./base/typography";
 
-@import "./layout/auth.scss";
+@import "./layout/auth";
+@import "./layout/sidebar";
+@import "./layout/main-content";
+@import "./layout/header";
 
 @import "./components/form";
 @import "./components/button";

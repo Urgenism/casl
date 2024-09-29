@@ -1,0 +1,14 @@
+.sidebar {
+  width: 250px;
+  background-color: var(--clr-primary-content);
+  color: var(--clr-black);
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  position: fixed;
+
+  .sidebar-nav {
+    margin-top: 24px;
+    padding: 20px;
+  }
+}

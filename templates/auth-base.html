@@ -16,25 +16,6 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
-    <div class="sidebar">
-      <h2>Child Arithmetic Learning System</h2>
-      <ul class="sidebar-nav">
-        <li><a href="#">Games</a></li>
-        <li><a href="#">Result</a></li>
-        <li><a href="#">Profile</a></li>
-      </ul>
-    </div>
-    <div class="main-content">
-      <!-- Header -->
-      <div class="header">
-        <h1>Header</h1>
-        <a href="{{ url_for('auth.logout') }}" class="btn btn--primary"
-          >Logout</a
-        >
-      </div>
-
-      <!-- Main content section -->
-      <div class="content">{% block content %}{% endblock %}</div>
-    </div>
+    {% block content %}{% endblock %}
   </body>
 </html>

@@ -4,22 +4,26 @@ from config import Config
 from modules.auth.routes import auth
 from modules.dashboard.routes import dashboard
 
-import sass  # Import the sass library
+import sass
+import os
 
 # Initialize the Flask application
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Replace with a secure key in production
+app.secret_key = "Swinburne_G22" 
 app.config.from_object(Config)
 
-# Compile SCSS to CSS
-scss_file = 'static/scss/app.scss'
-css_file = 'static/css/app.css'
 
-try:
-    with open(css_file, 'w') as f:
-        f.write(sass.compile(filename=scss_file))
-except OSError as e:
-    print(f"Error compiling SCSS: {e}")
+@app.before_request
+def before_first_request():
+    # Compile SCSS to CSS
+    scss_dir = os.path.join(app.static_folder, 'scss')
+    css_dir = os.path.join(app.static_folder, 'css')
+
+    # Compile SCSS files
+    try:
+        sass.compile(dirname=(scss_dir, css_dir), output_style='compressed')
+    except Exception as e:
+        print(f"Error compiling SCSS: {e}")
 
 # Initialize LoginManager
 login_manager = LoginManager()
@@ -34,6 +38,7 @@ def load_user(user_id):
 # Register blueprints
 app.register_blueprint(auth)
 app.register_blueprint(dashboard)
+
 
 if __name__ == '__main__':
     app.run(port=8000,debug=True)
