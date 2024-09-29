@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block title %}Dashboard{% endblock %} {% block
+content %}
+
+<div class="dashboard">
+  <h2>Welcome, {{ user.username }}!</h2>
+  <p>This is your dashboard.</p>
+  <p>You are logged in as: {{ user.email }}</p>
+  <a href="{{ url_for('auth.logout') }}" class="btn btn--primary">Logout</a>
+</div>
+
+{% endblock %}

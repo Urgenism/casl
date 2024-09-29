@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_login import LoginManager
 from config import Config
-from database.database import load_user
+from modules.auth.routes import auth
+from modules.dashboard.routes import dashboard
 
 import sass  # Import the sass library
 
@@ -31,8 +32,8 @@ def load_user(user_id):
     return load_user(user_id)
 
 # Register blueprints
-from modules.auth.routes import auth
 app.register_blueprint(auth)
+app.register_blueprint(dashboard)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=8000,debug=True)

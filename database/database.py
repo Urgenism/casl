@@ -1,6 +1,7 @@
 import mysql.connector
 from flask_login import UserMixin
 from config import Config
+from modules.auth.models import User
 
 def get_db_connection():
     return mysql.connector.connect(

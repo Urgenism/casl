@@ -3,6 +3,7 @@ from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from modules.auth.models import User
 from .queries import insert_user, get_user_by_email
+import mysql.connector  
 
 auth = Blueprint('auth', __name__)
 
@@ -47,7 +48,7 @@ def login():
         if user_data and check_password_hash(user_data['password'], password):
             user = User(**user_data)
             login_user(user)
-            return redirect(url_for('auth.dashboard'))  # Assuming you have a dashboard route
+            return redirect(url_for('dashboard.student'))  # Assuming you have a dashboard route
         else:
             flash('Invalid email or password', 'error')
 
