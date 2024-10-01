@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Game Selection{% endblock %}
+{% block content %}
+
+<div class="two-screen">
+  <div class="two-screen__image-screen">
+    <h2 class="heading heading--1">Child Arithmetic Learning System</h2>
+    <div class="two-screen__image-wrapper">
+      <img src="{{ url_for('static', filename='images/kids-learning.jpg') }}" />
+    </div>
+  </div>
+
+  <div class="two-screen__form">
+    <div class="main-content">
+      <!-- Header Section -->
+      <div class="header">
+        <div class="logo">LOGO</div>
+        <button class="logout">Logout</button>
+      </div>
+      
+      <!-- Game Selection Section -->
+      <div class="game-selection">
+        <h2>Select Games</h2>
+        <div class="game-buttons">
+          <button>Addition</button>
+          <button>Subtraction</button>
+          <button>Multiplication</button>
+          <button>Division</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
