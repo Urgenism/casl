@@ -3,6 +3,7 @@ from flask_login import LoginManager
 from config import Config
 from modules.auth.routes import auth
 from modules.dashboard.routes import dashboard
+from modules.result.routes import result
 
 import sass
 import os
@@ -38,7 +39,7 @@ def load_user(user_id):
 # Register blueprints
 app.register_blueprint(auth)
 app.register_blueprint(dashboard)
-
+app.register_blueprint(result)
 
 if __name__ == '__main__':
     app.run(port=8000,debug=True)

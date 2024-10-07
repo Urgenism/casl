@@ -19,3 +19,4 @@ def load_user(user_id):
     cursor.close()
     connection.close()
     return User(**user) if user else None
+
