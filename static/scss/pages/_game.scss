@@ -1,0 +1,39 @@
+.game {
+  color: var(--clr-white);
+  padding: 48px 24px;
+  text-align: center;
+  font-family: "Atma", cursive;
+  height: 80vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 24px;
+
+  &__question {
+    font-size: 96px;
+    font-weight: bold;
+  }
+
+  &__options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 80px;
+  }
+
+  &__option {
+    flex: 0 0 40%;
+    font-size: 48px;
+    background-color: var(--clr-primary);
+    padding: 24px;
+    border-radius: 12px;
+    cursor: pointer;
+
+    transition: all 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.4);
+    }
+  }
+}

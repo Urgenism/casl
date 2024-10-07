@@ -1,7 +1,12 @@
 .main-content {
+  background-image: url(../images/dashboard-bg1.png);
+  background-color: #e5fdff;
   margin-left: 250px;
+  background-size: contain;
+  height: 100vh;
+  position: relative;
 }
 
 .content {
-  padding: 24px;
+  padding: 40px;
 }

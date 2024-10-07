@@ -10,3 +10,8 @@ dashboard = Blueprint('dashboard', __name__)
 @login_required
 def student():
     return render_template('dashboard.html', user=current_user)
+
+@dashboard.route('/game')
+@login_required
+def game():
+    return render_template('game.html', user=current_user)
