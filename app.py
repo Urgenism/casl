@@ -1,52 +1,44 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, url_for
 import mysql.connector
-from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
 
-# Database connection
+# Database connection setup
 db = mysql.connector.connect(
     host="localhost",
     user="root",  
     password="12345678",  
-    database="tip_project"
+    database="tip_project"  
 )
-cursor = db.cursor() # database connect
+
+cursor = db.cursor()
 
 @app.route('/')
-def index():
-    return render_template('register.html') # index file return
+def quiz():
+    cursor.execute("SELECT * FROM Question")
+    questions = cursor.fetchall()
+    return render_template('quiz.html', questions=questions)
 
-@app.route('/register', methods=['POST'])
-def register():
-    child_name = request.form['child_name']    #get data using post method
-    age = request.form['age']
-    parent_name = request.form['parent_name']
-    mobile_number = request.form['mobile_number']
-    email = request.form['email']
-    password = request.form['password']
-    confirm_password = request.form['confirm_password']
+@app.route('/submit', methods=['POST'])
+def submit():
+    cursor.execute("SELECT * FROM Question")
+    questions = cursor.fetchall()
 
-    # Match both password
-    if password != confirm_password:   
-        flash('Passwords do not match!', 'error')
-        return redirect('/')
+    correct_answers = {q[0]: q[3] for q in questions}
+    score = 0
+    total = len(questions)
 
-    # Encrypt password
-    hashed_password = generate_password_hash(password)
+    for question in questions:
+        qid = str(question[0])
+        selected_option = request.form.get(f'question_{qid}')
+        if selected_option == correct_answers[qid]:
+            score += 1
 
-    # Insert data into MySQL
-    try:
-        cursor.execute('''INSERT INTO users (child_name, age, parent_name, mobile_number, email, password) 
-                          VALUES (%s, %s, %s, %s, %s, %s)''',
-                       (child_name, age, parent_name, mobile_number, email, hashed_password))
-        db.commit()
-        flash('Registration Successful!', 'success')
-        return redirect('/')
-    except mysql.connector.Error as err:
-        flash(f"Error: {err}", 'error')
-        return redirect('/')
+    
+    cursor.execute("INSERT INTO Result (Score, Total) VALUES (%s, %s)", (score, total))
+    db.commit()
+
+    return f"Your score is {score} out of {total}."
 
 if __name__ == '__main__':
     app.run(debug=True)
