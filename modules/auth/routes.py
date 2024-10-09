@@ -48,7 +48,8 @@ def login():
         if user_data and check_password_hash(user_data['password'], password):
             user = User(**user_data)
             login_user(user)
-            return redirect(url_for('dashboard.student'))  # Assuming you have a dashboard route
+            print(user_data)
+            return redirect(url_for('games.student'))  
         else:
             flash('Invalid email or password', 'error')
 

@@ -1,0 +1,23 @@
+{% extends 'dashboard-base.html' %} {% block pageTitle %}Games{% endblock %} {%
+block title %}Games{% endblock %} {% block content %}
+
+<div class="dashboard">
+  <ul class="games">
+    {% for game in games %}
+    <li class="games__item">
+      <a href="{{ url_for('games.game_question', id=game.id) }}">
+        <span class="icon">
+          {% if game.name == 'Addition' %} &plus; {% elif game.name ==
+          'Subtraction' %} &minus; {% elif game.name == 'Division' %} &divide;
+          {% elif game.name == 'Multiplication' %} &times; {% endif %}
+        </span>
+        {{ game.name }}
+      </a>
+    </li>
+    {% else %}
+    <li class="games__item">No games available.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

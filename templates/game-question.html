@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% block pageTitle %}Addition{% endblock %} {% block
-title %}Addition{% endblock %} {% block content %}
+{% extends 'dashboard-base.html' %} {% block pageTitle %}Addition{% endblock %}
+{% block title %}Addition{% endblock %} {% block content %}
 
 <div class="game">
   <p class="game__question">1) What is 1 + 1?</p>
@@ -9,12 +9,10 @@ title %}Addition{% endblock %} {% block content %}
     <li class="game__option">c) 2</li>
     <li class="game__option">4) 3</li>
   </ul>
-  <!--  <div>
-    <button>Prev</button>
-    <button>Next</button>
+  <div>
     <button>Skip</button>
+    <button>Submit</button>
   </div>
-  -->
 </div>
 
 {% endblock %}

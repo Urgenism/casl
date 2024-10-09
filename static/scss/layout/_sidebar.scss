@@ -21,7 +21,8 @@
       border-radius: 6px;
       transition: all 0.2s;
 
-      &:hover {
+      &:hover,
+      &.active {
         background-color: var(--clr-primary);
       }
     }

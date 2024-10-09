@@ -24,7 +24,13 @@
     <div class="sidebar">
       <h2 class="heading heading--5">Child Arithmetic Learning System</h2>
       <ul class="sidebar-nav">
-        <li><a href="#">Games</a></li>
+        <li>
+          <a
+            href="{{ url_for('games.dashboard') }}"
+            class="{% if request.endpoint == 'games.dashboard' %}active{% endif %}"
+            >Games</a
+          >
+        </li>
         <li><a href="#">Result</a></li>
         <li><a href="#">Profile</a></li>
       </ul>
