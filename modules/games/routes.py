@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, session, request, flash
 from flask_login import login_required, current_user
-from .queries import get_games, get_questions_by_game_id, save_result
+from .queries import get_games, get_questions_by_game_id, save_result, get_results_by_user_id
 
 from flask import Blueprint
 
@@ -74,6 +74,8 @@ def question(id):
 @games.route('/results',  methods=['GET'])
 @login_required
 def results():
-    return render_template('results.html', user=current_user)
+    results = get_results_by_user_id(current_user.id)
+    print(results)
+    return render_template('results.html', user=current_user, results=results)
 
 

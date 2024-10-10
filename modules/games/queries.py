@@ -39,3 +39,20 @@ def save_result(user_id, game_id, score):
     connection.close()
     
     return result_id 
+
+
+def get_results_by_user_id(user_id):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    try:
+        cursor.execute('SELECT * FROM result WHERE id_user = %s', (user_id,))
+        results = cursor.fetchall()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        results = []
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return results
