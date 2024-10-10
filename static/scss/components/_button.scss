@@ -16,8 +16,29 @@
   font-size: 16px;
   line-height: 1.5;
   border-radius: 4px;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: all 0.2s ease-in-out;
+
+  &--link {
+    position: relative;
+    padding: 0;
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 3px;
+      height: 1px;
+      width: 100%;
+      left: 0;
+      background-color: var(--clr-white);
+      transform: scale(0);
+      transform-origin: center;
+      transition: all 0.2s;
+    }
+
+    &:hover:after {
+      transform: scale(1);
+    }
+  }
 
   &--lg {
     padding: 12px 24px;

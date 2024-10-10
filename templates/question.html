@@ -2,11 +2,20 @@
 {% block title %}Addition{% endblock %} {% block content %}
 
 <div class="game">
+  <div class="text-left">
+    <a href="{{ url_for('games.dashboard')}}" class="btn clr-white btn--link">
+      &#8592; Go Back</a
+    >
+  </div>
   {% if show_result %}
-  <h1 class="heading">Game Over!</h1>
-  <p>Congratulation {{ current_user.full_name }}!</p>
-  <p>You score {{ final_score }} out of 10</p>
-  <a href="{{ url_for('games.question', id=1) }}">Play Again</a>
+  <div class="game__score">
+    <h3 class="heading heading--1">Game Over!</h3>
+    <p class="heading heading--2">
+      Congratulation {{ current_user.full_name }}!
+    </p>
+    <p class="game__score-text">You score {{ final_score }} out of 10</p>
+    <a href="{{ url_for('games.question', id=1) }}" class="btn">Play Again</a>
+  </div>
   {% else %}
   <form method="POST" novalidate>
     <p id="js-timer" class="game__timer"></p>
