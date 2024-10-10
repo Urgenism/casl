@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, session, request, flash
 from flask_login import login_required, current_user
-from .queries import get_games, get_questions_by_game_id
+from .queries import get_games, get_questions_by_game_id, save_result
 
 from flask import Blueprint
 
@@ -10,8 +10,10 @@ games = Blueprint('games', __name__)
 @games.route('/games')
 @login_required
 def dashboard():
+    session.pop('current_question', None)
+    session.pop('score', None)
+    
     games = get_games()
-    print(games)
     return render_template('games.html', user=current_user, games=games)
 
 @games.route('/games/<int:id>',  methods=['GET', 'POST'])
@@ -25,13 +27,18 @@ def question(id):
     
     current_question_index = session['current_question']
     
-    if current_question_index >= len(questions):
-        return redirect(url_for('games.result'))
+    if session['current_question'] >= 10:
+        save_result(current_user.id, id, session['score'])
+        final_score = session['score']
+            
+        session.pop('current_question', None)
+        session.pop('score', None)
+        
+        return render_template('question.html', user=current_user, show_result=True, final_score=final_score)
     
     current_question = questions[current_question_index]
     
     if request.method == 'POST':
-     
         
         if request.form.get('action') == 'Skip':
             session['current_question'] += 1
@@ -40,7 +47,6 @@ def question(id):
         user_answer = request.form.get('answer')
         
         if not user_answer:
-            # Flash an error message if no answer is selected
             flash('Please select an option before submitting!', 'error')
             return render_template('question.html', user=current_user, question=current_question, question_no=current_question_index + 1)
         
@@ -49,18 +55,25 @@ def question(id):
 
         # Move to next question
         session['current_question'] += 1
+        
+        # Save result
+        if session['current_question'] >= 10:
+            save_result(current_user.id, id, session['score'])
+            final_score = session['score']
+             
+            session.pop('current_question', None)
+            session.pop('score', None)
+            
+            return render_template('question.html', user=current_user, show_result=True, final_score=final_score)
+        
         return redirect(url_for('games.question', id=id))
         
     return render_template('question.html', user=current_user, question=current_question, question_no=current_question_index + 1)
 
 
-@games.route('/result',  methods=['GET'])
+@games.route('/results',  methods=['GET'])
 @login_required
-def result():
-    
-    print("your score is", session['score'])
-    session['current_question'] = 0
-    session['score'] = 0
-    
-    return render_template('result.html', user=current_user)
+def results():
+    return render_template('results.html', user=current_user)
+
 

@@ -2,6 +2,12 @@
 {% block title %}Addition{% endblock %} {% block content %}
 
 <div class="game">
+  {% if show_result %}
+  <h1 class="heading">Game Over!</h1>
+  <p>Congratulation {{ current_user.full_name }}!</p>
+  <p>You score {{ final_score }} out of 10</p>
+  <a href="{{ url_for('games.question', id=1) }}">Play Again</a>
+  {% else %}
   <form method="POST" novalidate>
     <p id="js-timer" class="game__timer"></p>
     <p class="game__question">{{question_no}}) {{ question.description }}</p>
@@ -68,6 +74,7 @@
       </button>
     </div>
   </form>
+  {% endif %}
 
   <div id="flash-message" style="display: none">
     {% with messages = get_flashed_messages(with_categories=false) %} {% if
@@ -77,16 +84,22 @@
 
 <script>
   let timeLeft = 30;
+  let timeout = null;
 
   function countdown() {
     const timerDisplay = document.getElementById("js-timer");
+    if (!timerDisplay) {
+      if (timeout) clearTimeout(timeout);
+      return undefined;
+    }
+
     timerDisplay.textContent = timeLeft + " seconds remaining";
     timeLeft--;
 
     if (timeLeft < 0) {
       document.getElementById("js-skip").click(); // Auto-submit the form
     } else {
-      setTimeout(countdown, 1000);
+      timeout = setTimeout(countdown, 1000);
     }
   }
 

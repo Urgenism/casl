@@ -24,3 +24,18 @@ def get_questions_by_game_id(game_id):
         connection.close()
         
     return questions
+
+def save_result(user_id, game_id, score):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    cursor.execute('''
+        INSERT INTO result (id_user, id_game, score)
+        VALUES (%s, %s, %s)
+    ''', (user_id, game_id, score))
+    result_id = cursor.lastrowid
+    
+    connection.commit()
+    connection.close()
+    
+    return result_id 
