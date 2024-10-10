@@ -1,14 +1,16 @@
 .game {
   color: var(--clr-white);
-  padding: 48px 24px;
+  padding: 48px 32px;
   text-align: center;
   font-family: "Atma", cursive;
   height: 80vh;
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
 
   &__question {
-    font-size: 96px;
+    font-size: 84px;
     font-weight: bold;
   }
 
@@ -18,22 +20,51 @@
     align-items: center;
     gap: 32px;
     flex-wrap: wrap;
-    margin-top: 80px;
+    margin-top: 60px;
   }
 
   &__option {
-    flex: 0 0 40%;
-    font-size: 48px;
-    background-color: var(--clr-primary);
-    padding: 24px;
+    flex: 0 0 calc(50% - 16px);
+  }
+
+  &__option-label {
+    font-size: 42px;
+    background-color: var(--clr-secondary);
+    padding: 20px;
     border-radius: 12px;
     cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 100%;
 
     transition: all 0.2s;
 
     &:hover {
       transform: scale(1.05);
       box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.4);
+    }
+
+    &:active {
+      transform: scale(1);
+      box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &__option-input {
+    display: none;
+  }
+
+  &__option-input:checked ~ &__option-label {
+    background-color: var(--clr-success);
+  }
+
+  &__btn {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+
+    & .btn:first-child {
+      margin-right: 16px;
     }
   }
 }

@@ -49,7 +49,7 @@ def login():
             user = User(**user_data)
             login_user(user)
             print(user_data)
-            return redirect(url_for('games.student'))  
+            return redirect(url_for('games.dashboard'))  
         else:
             flash('Invalid email or password', 'error')
 

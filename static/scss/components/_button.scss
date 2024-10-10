@@ -19,12 +19,27 @@
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
+  &--lg {
+    padding: 12px 24px;
+    font-size: 20px;
+    border-radius: 8px;
+  }
+
   &--primary {
     background-color: var(--clr-primary);
     color: var(--clr-white);
 
     &:hover {
       background-color: var(--clr-primary-dark);
+    }
+  }
+
+  &--gray {
+    background-color: var(--clr-black-lighter);
+    color: var(--clr-white);
+
+    &:hover {
+      background-color: var(--clr-black-light);
     }
   }
 }

@@ -1,0 +1,70 @@
+{% extends 'dashboard-base.html' %} {% block pageTitle %}Addition{% endblock %}
+{% block title %}Addition{% endblock %} {% block content %}
+
+<div class="game">
+  <form method="POST">
+    <p class="game__question">{{question_no}}) {{ question.description }}</p>
+    <ul class="game__options">
+      <label class="game__option">
+        <input
+          type="radio"
+          name="answer"
+          value="{{ question.option_a }}"
+          class="game__option-input"
+        />
+        <span class="game__option-label"> {{ question.option_a }} </span>
+      </label>
+
+      <label class="game__option">
+        <input
+          type="radio"
+          name="answer"
+          value="{{ question.option_b }}"
+          class="game__option-input"
+        />
+        <span class="game__option-label">{{ question.option_b }}</span>
+      </label>
+
+      <label class="game__option">
+        <input
+          type="radio"
+          name="answer"
+          value="{{ question.option_c }}"
+          class="game__option-input"
+        />
+        <span class="game__option-label">{{ question.option_c }}</span>
+      </label>
+
+      <label class="game__option">
+        <input
+          type="radio"
+          name="answer"
+          value="{{ question.option_d }}"
+          class="game__option-input"
+        />
+        <span class="game__option-label">{{ question.option_d }}</span>
+      </label>
+    </ul>
+    <div class="game__btn">
+      <button
+        type="submit"
+        name="action"
+        value="Skip"
+        class="btn btn--lg btn--gray"
+      >
+        Skip
+      </button>
+
+      <button
+        type="submit"
+        name="action"
+        value="Submit"
+        class="btn btn--lg btn--primary"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
