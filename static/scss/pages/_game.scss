@@ -9,6 +9,12 @@
   max-width: 1200px;
   margin: 0 auto;
 
+  &__timer {
+    text-align: right;
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+
   &__question {
     font-size: 84px;
     font-weight: bold;

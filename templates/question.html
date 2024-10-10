@@ -2,11 +2,13 @@
 {% block title %}Addition{% endblock %} {% block content %}
 
 <div class="game">
-  <form method="POST">
+  <form method="POST" novalidate>
+    <p id="js-timer" class="game__timer"></p>
     <p class="game__question">{{question_no}}) {{ question.description }}</p>
     <ul class="game__options">
       <label class="game__option">
         <input
+          required
           type="radio"
           name="answer"
           value="{{ question.option_a }}"
@@ -49,6 +51,7 @@
       <button
         type="submit"
         name="action"
+        id="js-skip"
         value="Skip"
         class="btn btn--lg btn--gray"
       >
@@ -65,6 +68,36 @@
       </button>
     </div>
   </form>
+
+  <div id="flash-message" style="display: none">
+    {% with messages = get_flashed_messages(with_categories=false) %} {% if
+    messages %} {{ messages[0] }} {% endif %} {% endwith %}
+  </div>
 </div>
+
+<script>
+  let timeLeft = 30;
+
+  function countdown() {
+    const timerDisplay = document.getElementById("js-timer");
+    timerDisplay.textContent = timeLeft + " seconds remaining";
+    timeLeft--;
+
+    if (timeLeft < 0) {
+      document.getElementById("js-skip").click(); // Auto-submit the form
+    } else {
+      setTimeout(countdown, 1000);
+    }
+  }
+
+  window.onload = function () {
+    countdown();
+
+    const flashMessage = document.getElementById("flash-message").textContent;
+    if (flashMessage.trim() !== "") {
+      alert(flashMessage);
+    }
+  };
+</script>
 
 {% endblock %}
