@@ -1,0 +1,35 @@
+.results {
+  padding: 48px 32px;
+  height: 80vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--clr-white);
+  border-radius: 24px;
+  max-width: 1200px;
+  overflow: scroll;
+  margin: 0 auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 12px 15px;
+    border: 1px solid var(--clr-black-lighter);
+  }
+
+  th {
+    background-color: var(--clr-black-light);
+  }
+
+  caption {
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: left;
+  }
+}

@@ -14,7 +14,16 @@
       Congratulation {{ current_user.full_name }}!
     </p>
     <p class="game__score-text">You score {{ final_score }} out of 10</p>
-    <a href="{{ url_for('games.question', id=1) }}" class="btn">Play Again</a>
+    <div class="mb-4">
+      <a
+        href="{{ url_for('games.question', id=game_id) }}"
+        class="btn btn--lg btn--gray"
+        >Play Again</a
+      >
+    </div>
+    <a href="{{ url_for('games.results') }}" class="btn btn--lg btn--primary"
+      >View Results</a
+    >
   </div>
   {% else %}
   <form method="POST" novalidate>

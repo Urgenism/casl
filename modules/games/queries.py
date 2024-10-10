@@ -39,3 +39,37 @@ def save_result(user_id, game_id, score):
     connection.close()
     
     return result_id 
+
+
+def get_results_by_user_id(user_id):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)  
+
+    try:
+        cursor.execute("""
+        SELECT 
+            result.id,
+            result.id_user,
+            result.id_game,
+            result.score,
+            result.feedback,
+            result.created_at,
+            games.name AS game_name
+        FROM 
+            result
+        JOIN 
+            games ON result.id_game = games.id
+        WHERE 
+            result.id_user = %s
+        ORDER BY 
+            result.created_at DESC
+        """, (user_id,))
+        results = cursor.fetchall()
+    except Exception as e:
+        print(f"An error occurred while fetching results: {e}")
+        results = []
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return results
