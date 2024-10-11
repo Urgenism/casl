@@ -1,0 +1,20 @@
+.profile {
+  padding: 48px 32px;
+  height: 80vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--clr-white);
+  border-radius: 24px;
+  max-width: 1200px;
+  overflow: scroll;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .flashes {
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+}

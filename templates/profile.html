@@ -1,0 +1,58 @@
+{% extends 'dashboard-base.html' %} {% block pageTitle %}Profile{% endblock %}
+{% block title %}Profile{% endblock %} {% block content %}
+
+<div class="profile">
+  <form method="POST" class="auth-form">
+    {% with messages = get_flashed_messages(with_categories=True) %} {% if
+    messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <div class="form-control">
+      <label for="username" class="form-control__label">Full Name</label>
+      <input
+        type="text"
+        name="username"
+        required
+        class="form-control__input"
+        value="{{current_user.full_name}}"
+      />
+    </div>
+    <div class="form-control">
+      <label for="email" class="form-control__label">Email</label>
+      <input
+        type="text"
+        name="email"
+        required
+        class="form-control__input"
+        value="{{current_user.email}}"
+      />
+    </div>
+    <div class="form-control">
+      <label for="phone" class="form-control__label">Phone Number</label>
+      <input
+        type="text"
+        name="phone"
+        required
+        class="form-control__input"
+        value="{{current_user.phone}}"
+      />
+    </div>
+    <div class="form-control">
+      <label for="class_id" class="form-control__label">Class</label>
+      <input
+        type="text"
+        name="class_id"
+        required
+        class="form-control__input"
+        value="{{current_user.class_id}}"
+      />
+    </div>
+
+    <input type="submit" value="Update" class="btn btn--primary w-100 mt-4" />
+  </form>
+</div>
+{% endblock %}

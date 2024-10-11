@@ -38,7 +38,13 @@
             >Result</a
           >
         </li>
-        <li><a href="#">Profile</a></li>
+        <li>
+          <a
+            href="{{ url_for('games.profile') }}"
+            class="{% if request.endpoint == 'games.profile' %}active{% endif %}"
+            >Profile</a
+          >
+        </li>
       </ul>
     </div>
     <div class="main-content">
