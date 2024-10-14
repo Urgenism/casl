@@ -1,5 +1,5 @@
-{% extends 'dashboard-base.html' %} {% block pageTitle %}Results{% endblock %}
-{% block title %}Results{% endblock %} {% block content %}
+{% extends 'dashboard-base.html' %} {% block pageTitle %}Users{% endblock %} {%
+block title %}Users{% endblock %} {% block content %}
 
 <div class="results">
   <table border="1">
@@ -17,7 +17,7 @@
         <td>{{ result.game_name }}</td>
         <td>{{ result.score }}</td>
         <td>{{ result.feedback }}</td>
-        <td>{{ result.created_at.strftime("%B %d, %Y, %I:%M %p") }}</td>
+        <td>{{ result.created_at }}</td>
       </tr>
       {% endfor %}
     </tbody>

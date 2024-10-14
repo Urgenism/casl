@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, session, request, flash
-from flask_login import login_required, current_user
-from werkzeug.security import generate_password_hash
+from flask_login import login_required, current_user, login_user
+from database.database import load_user
 from .queries import get_games, get_questions_by_game_id, save_result, get_results_by_user_id, update_user
 import mysql.connector  
 
@@ -84,7 +84,7 @@ def results():
 @games.route('/profile',  methods=['GET', 'POST'])
 @login_required
 def profile():
-    
+    user = current_user
     if request.method == 'POST':
         full_name = request.form['username']
         email = request.form['email']
@@ -92,10 +92,18 @@ def profile():
         class_id = request.form['class_id']
 
         try:
-            update_user(current_user.id, full_name, email, phone, class_id)
+            updated_user = update_user(user.id, full_name, email, phone, class_id)
             flash('Update successful', 'success')
+            login_user(load_user(user.id))
+            user = updated_user
+        
         except mysql.connector.IntegrityError:
             flash('Email already exists', 'error')
 
-    return render_template('profile.html', user=current_user)
+    return render_template('profile.html', user=user)
+
+@games.route('/users',  methods=['GET', 'POST'])
+@login_required
+def users():
+    return render_template('users.html',)
 

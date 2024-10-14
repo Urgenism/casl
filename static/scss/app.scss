@@ -9,12 +9,12 @@
 @import "./layout/main-content";
 @import "./layout/header";
 
-@import "./components/form";
-@import "./components/button";
-@import "./components/utils";
-
 @import "./pages/register";
 @import "./pages/dashboard";
 @import "./pages/game";
 @import "./pages/results";
 @import "./pages/profile";
+
+@import "./components/form";
+@import "./components/button";
+@import "./components/utils";
