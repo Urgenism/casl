@@ -14,7 +14,6 @@ teacher = Blueprint('teacher', __name__)
 @role_required('teacher')
 def student_list():
     students = get_students()
-    print(students, 'students')
     return render_template('student-results.html', user=current_user, students=students )
 
 @teacher.route('/student-results/<int:id>', methods=['GET', 'POST'])
@@ -26,7 +25,7 @@ def student_results(id):
     
     if request.method == 'POST':
         result_id = request.form['result_id']
-        feedback = request.form['feedback']
+        feedback = request.form['action']
   
         udpate_result_by_id(result_id, feedback)
                 

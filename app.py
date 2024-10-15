@@ -5,6 +5,7 @@ from modules.auth.routes import auth
 from modules.student.routes import student
 from modules.teacher.routes import teacher
 from modules.common.routes import common
+from modules.admin.routes import admin
 
 import sass
 import os
@@ -42,6 +43,7 @@ app.register_blueprint(auth)
 app.register_blueprint(common)
 app.register_blueprint(student)
 app.register_blueprint(teacher)
+app.register_blueprint(admin)
 
 if __name__ == '__main__':
     app.run(port=8000,debug=True)

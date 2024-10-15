@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Atma:400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/app.css') }}"
+    />
+    <title>{% block pageTitle %}{% endblock %}</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2 class="heading heading--5">Child Arithmetic Learning System</h2>
+      <ul class="sidebar-nav">
+        <li>
+          <a
+            href="{{ url_for('admin.users') }}"
+            class="{% if request.endpoint == 'admin.users' %}active{% endif %}"
+            >Users</a
+          >
+        </li>
+        <li>
+          <a
+            href="{{ url_for('common.profile') }}"
+            class="{% if request.endpoint == 'common.profile' %}active{% endif %}"
+            >Profile</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <!-- Header -->
+      <div class="header">
+        <h2 class="heading heading--4">{% block title %}{% endblock %}</h2>
+        <a href="{{ url_for('auth.logout') }}" class="btn btn--primary"
+          >Logout</a
+        >
+      </div>
+
+      <!-- Main content section -->
+      <div class="content">{% block content %}{% endblock %}</div>
+    </div>
+  </body>
+</html>

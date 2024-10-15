@@ -85,9 +85,3 @@ def results():
        
     return render_template('results.html', user=current_user, results=results, base_template=base_template)
 
-
-@student.route('/users',  methods=['GET', 'POST'])
-@login_required
-def users():
-    return render_template('users.html',)
-

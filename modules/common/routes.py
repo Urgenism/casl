@@ -33,7 +33,7 @@ def profile():
     elif user.role == 'teacher':
         base_template = 'dashboard-teacher.html'
     else:
-        base_template = 'dashboard-base.html'
+        base_template = 'dashboard-admin.html'
         
     return render_template('profile.html', user=user, base_template=base_template)
 

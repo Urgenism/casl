@@ -28,7 +28,7 @@ def register():
 
         try:
             insert_user(full_name, email, hashed_password, phone, role, class_id)
-            flash('Registration successful', 'success')
+            flash('Registration successful. Please contact admin to activate your account', 'success')
             return redirect(url_for('auth.login'))
         except mysql.connector.IntegrityError:
             flash('Email already exists', 'error')
@@ -46,13 +46,19 @@ def login():
         user_data = get_user_by_email(email)
          
         if user_data and check_password_hash(user_data['password'], password):
-            user = User(**user_data)
-            login_user(user)
-            
-            if(user_data['role'] == 'student'):
-                return redirect(url_for('student.dashboard'))  
-            elif(user_data['role'] == 'teacher'):
-                return redirect(url_for('teacher.student_list'))
+            if user_data['active'] == 1:  
+                user = User(**user_data)
+                login_user(user)
+                
+                if user_data['role'] == 'student':
+                    return redirect(url_for('student.dashboard'))  
+                elif user_data['role'] == 'teacher':
+                    return redirect(url_for('teacher.student_list'))
+                elif user_data['role'] == 'admin':
+                    return redirect(url_for('admin.users'))
+            else:
+                flash('Your account is inactive. Please contact admin.', 'error')
+                
         else:
             flash('Invalid email or password', 'error')
 
