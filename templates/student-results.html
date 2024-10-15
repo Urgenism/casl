@@ -1,0 +1,33 @@
+{% extends 'dashboard-teacher.html' %} {% block pageTitle %}Students{% endblock
+%} {% block title %}Students {% endblock %} {% block content %}
+
+<div class="results">
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Email</th>
+        <th>Class</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in students %}
+      <tr>
+        <td>{{ student.full_name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.class_id }}</td>
+        <td>
+          <a
+            href="{{ url_for('teacher.student_results', id=student.id) }}"
+            class="btn btn--primary"
+            >View Result</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

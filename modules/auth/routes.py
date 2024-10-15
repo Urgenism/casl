@@ -48,7 +48,11 @@ def login():
         if user_data and check_password_hash(user_data['password'], password):
             user = User(**user_data)
             login_user(user)
-            return redirect(url_for('student.dashboard'))  
+            
+            if(user_data['role'] == 'student'):
+                return redirect(url_for('student.dashboard'))  
+            elif(user_data['role'] == 'teacher'):
+                return redirect(url_for('teacher.dashboard'))
         else:
             flash('Invalid email or password', 'error')
 

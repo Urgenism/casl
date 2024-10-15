@@ -7,8 +7,8 @@
       <tr>
         <th>Game Name</th>
         <th>Score</th>
+        <th>Date Played</th>
         <th>Feedback</th>
-        <th>Created At</th>
       </tr>
     </thead>
     <tbody>
@@ -16,8 +16,8 @@
       <tr>
         <td>{{ result.game_name }}</td>
         <td>{{ result.score }}</td>
-        <td>{{ result.feedback }}</td>
         <td>{{ result.created_at.strftime("%B %d, %Y, %I:%M %p") }}</td>
+        <td>{{ result.feedback }}</td>
       </tr>
       {% endfor %}
     </tbody>

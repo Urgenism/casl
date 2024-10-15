@@ -73,18 +73,3 @@ def get_results_by_user_id(user_id):
         connection.close()
         
     return results
-
-
-
-def update_user(id, full_name, email, phone, class_id):
-    connection = get_db_connection()
-    cursor = connection.cursor()
-    cursor.execute("""
-            UPDATE users
-            SET full_name = %s, email = %s, phone = %s, class_id = %s
-            WHERE id = %s
-        """, (full_name, email, phone, class_id, id))
-    
-    connection.commit()
-    cursor.close()
-    connection.close()

@@ -26,15 +26,8 @@
       <ul class="sidebar-nav">
         <li>
           <a
-            href="{{ url_for('student.dashboard') }}"
-            class="{% if request.endpoint == 'student.dashboard' %}active{% endif %}"
-            >Games</a
-          >
-        </li>
-        <li>
-          <a
-            href="{{ url_for('student.results') }}"
-            class="{% if request.endpoint == 'student.results' %}active{% endif %}"
+            href="{{ url_for('teacher.student_list') }}"
+            class="{% if request.endpoint == 'teacher.student_list' %}active{% endif %}"
             >Result</a
           >
         </li>
