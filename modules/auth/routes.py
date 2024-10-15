@@ -15,7 +15,7 @@ def register():
         password = request.form['password']
         confirm_password = request.form['confirm_password']
         phone = request.form['phone']
-        user_type = request.form['user_type']
+        role = request.form['role']
         class_id = request.form['class_id']
 
         # Validate passwords match
@@ -27,7 +27,7 @@ def register():
         hashed_password = generate_password_hash(password)
 
         try:
-            insert_user(full_name, email, hashed_password, phone, user_type, class_id)
+            insert_user(full_name, email, hashed_password, phone, role, class_id)
             flash('Registration successful', 'success')
             return redirect(url_for('auth.login'))
         except mysql.connector.IntegrityError:
@@ -48,7 +48,7 @@ def login():
         if user_data and check_password_hash(user_data['password'], password):
             user = User(**user_data)
             login_user(user)
-            return redirect(url_for('games.dashboard'))  
+            return redirect(url_for('student.dashboard'))  
         else:
             flash('Invalid email or password', 'error')
 

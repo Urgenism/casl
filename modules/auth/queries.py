@@ -1,12 +1,12 @@
 from database.database import get_db_connection
 
-def insert_user(full_name, email, hashed_password, phone, user_type, class_id):
+def insert_user(full_name, email, hashed_password, phone, role, class_id):
     connection = get_db_connection()
     cursor = connection.cursor()
     cursor.execute("""
-        INSERT INTO users (full_name, email, password, phone, user_type, class_id) 
+        INSERT INTO users (full_name, email, password, phone, role, class_id) 
         VALUES (%s, %s, %s, %s, %s, %s)
-    """, (full_name, email, hashed_password, phone, user_type, class_id))
+    """, (full_name, email, hashed_password, phone, role, class_id))
     connection.commit()
     cursor.close()
     connection.close()

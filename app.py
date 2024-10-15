@@ -2,7 +2,7 @@ from flask import Flask
 from flask_login import LoginManager
 from config import Config
 from modules.auth.routes import auth
-from modules.games.routes import games
+from modules.student.routes import student
 
 import sass
 import os
@@ -37,7 +37,7 @@ def load_user(user_id):
 
 # Register blueprints
 app.register_blueprint(auth)
-app.register_blueprint(games)
+app.register_blueprint(student)
 
 
 if __name__ == '__main__':

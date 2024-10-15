@@ -4,6 +4,6 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
-    user_type ENUM('student', 'teacher') NOT NULL,
-    class_id VARCHAR(50) NOT NULL
+    role ENUM('student', 'teacher', 'admin') NOT NULL, 
+    class_id VARCHAR(50) -- Class ID can be NULL for admins if needed
 );

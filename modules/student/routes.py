@@ -3,14 +3,16 @@ from flask_login import login_required, current_user, login_user
 from database.database import load_user
 from .queries import get_games, get_questions_by_game_id, save_result, get_results_by_user_id, update_user
 import mysql.connector  
+from utils import role_required
 
 from flask import Blueprint
 
 # Create a new blueprint for the games
-games = Blueprint('games', __name__)
+student = Blueprint('student', __name__)
 
-@games.route('/games')
+@student.route('/games')
 @login_required
+@role_required('student')
 def dashboard():
     session.pop('current_question', None)
     session.pop('score', None)
@@ -18,8 +20,9 @@ def dashboard():
     games = get_games()
     return render_template('games.html', user=current_user, games=games)
 
-@games.route('/games/<int:id>',  methods=['GET', 'POST'])
+@student.route('/games/<int:id>',  methods=['GET', 'POST'])
 @login_required
+@role_required('student')
 def question(id):
     questions = get_questions_by_game_id(id)
     
@@ -44,7 +47,7 @@ def question(id):
         
         if request.form.get('action') == 'Skip':
             session['current_question'] += 1
-            return redirect(url_for('games.question', id=id))
+            return redirect(url_for('student.question', id=id))
         
         user_answer = request.form.get('answer')
         
@@ -68,20 +71,21 @@ def question(id):
             
             return render_template('question.html', user=current_user, show_result=True, final_score=final_score, game_id=id)
         
-        return redirect(url_for('games.question', id=id))
+        return redirect(url_for('student.question', id=id))
         
     return render_template('question.html', user=current_user, question=current_question, question_no=current_question_index + 1)
 
 
-@games.route('/results',  methods=['GET'])
+@student.route('/results',  methods=['GET'])
 @login_required
+@role_required('student')
 def results():
     results = get_results_by_user_id(current_user.id)
     print(results)
     return render_template('results.html', user=current_user, results=results)
 
 
-@games.route('/profile',  methods=['GET', 'POST'])
+@student.route('/profile',  methods=['GET', 'POST'])
 @login_required
 def profile():
     user = current_user
@@ -102,7 +106,7 @@ def profile():
 
     return render_template('profile.html', user=user)
 
-@games.route('/users',  methods=['GET', 'POST'])
+@student.route('/users',  methods=['GET', 'POST'])
 @login_required
 def users():
     return render_template('users.html',)

@@ -3,7 +3,7 @@
 
 <div class="game">
   <div class="text-left">
-    <a href="{{ url_for('games.dashboard')}}" class="btn clr-white btn--link">
+    <a href="{{ url_for('student.dashboard')}}" class="btn clr-white btn--link">
       &#8592; Go Back</a
     >
   </div>
@@ -16,12 +16,12 @@
     <p class="game__score-text">You score {{ final_score }} out of 10</p>
     <div class="mb-4">
       <a
-        href="{{ url_for('games.question', id=game_id) }}"
+        href="{{ url_for('student.question', id=game_id) }}"
         class="btn btn--lg btn--gray"
         >Play Again</a
       >
     </div>
-    <a href="{{ url_for('games.results') }}" class="btn btn--lg btn--primary"
+    <a href="{{ url_for('student.results') }}" class="btn btn--lg btn--primary"
       >View Results</a
     >
   </div>

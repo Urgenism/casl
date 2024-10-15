@@ -26,22 +26,22 @@
       <ul class="sidebar-nav">
         <li>
           <a
-            href="{{ url_for('games.dashboard') }}"
-            class="{% if request.endpoint == 'games.dashboard' %}active{% endif %}"
+            href="{{ url_for('student.dashboard') }}"
+            class="{% if request.endpoint == 'student.dashboard' %}active{% endif %}"
             >Games</a
           >
         </li>
         <li>
           <a
-            href="{{ url_for('games.results') }}"
-            class="{% if request.endpoint == 'games.results' %}active{% endif %}"
+            href="{{ url_for('student.results') }}"
+            class="{% if request.endpoint == 'student.results' %}active{% endif %}"
             >Result</a
           >
         </li>
         <li>
           <a
-            href="{{ url_for('games.profile') }}"
-            class="{% if request.endpoint == 'games.profile' %}active{% endif %}"
+            href="{{ url_for('student.profile') }}"
+            class="{% if request.endpoint == 'student.profile' %}active{% endif %}"
             >Profile</a
           >
         </li>

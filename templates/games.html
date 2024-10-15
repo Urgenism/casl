@@ -5,7 +5,7 @@ block title %}Games{% endblock %} {% block content %}
   <ul class="games">
     {% for game in games %}
     <li class="games__item">
-      <a href="{{ url_for('games.question', id=game.id) }}">
+      <a href="{{ url_for('student.question', id=game.id) }}">
         <span class="icon">
           {% if game.name == 'Addition' %} &plus; {% elif game.name ==
           'Subtraction' %} &minus; {% elif game.name == 'Division' %} &divide;
