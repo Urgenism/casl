@@ -1,7 +1,8 @@
 from flask import render_template,request, flash
 from flask_login import login_required, current_user, login_user
 from database.database import load_user
-from .queries import update_user
+from .queries import update_user, get_user_by_id
+from utils import dict_to_user
 import mysql.connector  
 
 from flask import Blueprint
@@ -20,14 +21,16 @@ def profile():
         class_id = request.form['class_id']
 
         try:
-            updated_user = update_user(user.id, full_name, email, phone, class_id)
+            update_user(user.id, full_name, email, phone, class_id)
             flash('Update successful', 'success')
             login_user(load_user(user.id))
-            user = updated_user
+        
+            user = dict_to_user(get_user_by_id(user.id))
         
         except mysql.connector.IntegrityError:
             flash('Email already exists', 'error')
-
+     
+    print(user)
     if user.role == 'student':
         base_template = 'dashboard-base.html'
     elif user.role == 'teacher':

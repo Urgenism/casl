@@ -25,7 +25,7 @@ def student_results(id):
     
     if request.method == 'POST':
         result_id = request.form['result_id']
-        feedback = request.form['action']
+        feedback = request.form['feedback']
   
         udpate_result_by_id(result_id, feedback)
                 

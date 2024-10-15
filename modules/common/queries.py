@@ -12,3 +12,13 @@ def update_user(id, full_name, email, phone, class_id):
     connection.commit()
     cursor.close()
     connection.close()
+
+
+def get_user_by_id(id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id,))
+    user = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return user
