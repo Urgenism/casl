@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, session, request, flash
 from flask_login import login_required, current_user
 from database.database import load_user
-from .queries import get_games, get_questions_by_game_id, save_result, get_results_by_user_id
+from .queries import get_games, get_questions_by_game_id, save_result, get_results_by_user_id, get_game_by_id
 from utils import role_required
 
 from flask import Blueprint
@@ -24,6 +24,7 @@ def dashboard():
 @role_required('student')
 def question(id):
     questions = get_questions_by_game_id(id)
+    game = get_game_by_id(id)
     
     if 'current_question' not in session:
         session['current_question'] = 0
@@ -38,7 +39,7 @@ def question(id):
         session.pop('current_question', None)
         session.pop('score', None)
         
-        return render_template('question.html', user=current_user, show_result=True, final_score=final_score, game_id=id)
+        return render_template('question.html', user=current_user, show_result=True, final_score=final_score, game_id=id, game=game)
     
     current_question = questions[current_question_index]
     
@@ -52,7 +53,7 @@ def question(id):
         
         if not user_answer:
             flash('Please select an option before submitting!', 'error')
-            return render_template('question.html', user=current_user, question=current_question, question_no=current_question_index + 1)
+            return render_template('question.html', user=current_user, question=current_question, question_no=current_question_index + 1, game=game)
         
         if user_answer and int(user_answer) == current_question['correct_answer']:
             session['score'] += 1
@@ -68,11 +69,11 @@ def question(id):
             session.pop('current_question', None)
             session.pop('score', None)
             
-            return render_template('question.html', user=current_user, show_result=True, final_score=final_score, game_id=id)
+            return render_template('question.html', user=current_user, show_result=True, final_score=final_score, game_id=id, game=game)
         
         return redirect(url_for('student.question', id=id))
-        
-    return render_template('question.html', user=current_user, question=current_question, question_no=current_question_index + 1)
+    
+    return render_template('question.html', user=current_user, question=current_question, question_no=current_question_index + 1, game=game)
 
 
 @student.route('/results',  methods=['GET'])

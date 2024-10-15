@@ -9,6 +9,17 @@ def get_games():
     connection.close()
     return games
 
+def get_game_by_id(id):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    cursor.execute('SELECT * FROM games WHERE id=%s', (id,))
+    games = cursor.fetchone()
+    cursor.close()
+    connection.close()
+    
+    return games
+
 def get_questions_by_game_id(game_id):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
