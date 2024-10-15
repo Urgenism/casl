@@ -8,3 +8,16 @@ def get_students():
     cursor.close()
     connection.close()
     return students
+
+
+def udpate_result_by_id(id, feedback):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute('''
+        UPDATE result 
+        SET feedback=%s
+        WHERE id=%s
+    ''', (feedback, id))
+        
+    connection.commit()
+    connection.close()

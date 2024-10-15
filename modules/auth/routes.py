@@ -52,7 +52,7 @@ def login():
             if(user_data['role'] == 'student'):
                 return redirect(url_for('student.dashboard'))  
             elif(user_data['role'] == 'teacher'):
-                return redirect(url_for('teacher.dashboard'))
+                return redirect(url_for('teacher.student_list'))
         else:
             flash('Invalid email or password', 'error')
 

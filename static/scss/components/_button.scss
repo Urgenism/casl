@@ -46,6 +46,12 @@
     border-radius: 8px;
   }
 
+  &--sm {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+
   &--primary {
     background-color: var(--clr-primary);
     color: var(--clr-white);

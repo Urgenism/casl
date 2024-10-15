@@ -1,5 +1,5 @@
-{% extends 'dashboard-base.html' %} {% block pageTitle %}Results{% endblock %}
-{% block title %}Results{% endblock %} {% block content %}
+{% extends base_template %} {% block pageTitle %}Results{% endblock %} {% block
+title %}Results{% endblock %} {% block content %}
 
 <div class="results">
   <table border="1">
@@ -17,11 +17,78 @@
         <td>{{ result.game_name }}</td>
         <td>{{ result.score }}</td>
         <td>{{ result.created_at.strftime("%B %d, %Y, %I:%M %p") }}</td>
-        <td>{{ result.feedback }}</td>
+        <td style="max-width: 400px">
+          {% if result.feedback %} {{ result.feedback }} {% elif
+          current_user.role == 'teacher' %}
+          <button
+            class="btn btn--primary js-modal-trigger"
+            data-result-id="{{result.id}}"
+          >
+            Add Feedback
+          </button>
+          {% endif %}
+        </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+
+  <!-- Modal content -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="heading heading--5">Feedback Form</h5>
+        <span class="close" id="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="">
+          <input type="hidden" name="result_id" id="resultId" value="" />
+          <div class="form-control">
+            <label class="form-control__label">Feeback</label>
+            <textarea
+              class="form-control__input"
+              id="feedback"
+              name="feedback"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+
+          <input
+            type="submit"
+            value="Submit Feedback"
+            class="btn btn--gray btn--sm"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
+<script>
+  var modal = document.getElementById("myModal");
+
+  var btns = document.getElementsByClassName("js-modal-trigger");
+
+  var span = document.getElementsByClassName("close")[0];
+
+  Array.from(btns).forEach(function (btn) {
+    btn.onclick = function () {
+      modal.style.display = "block";
+      var resultId = btn.dataset.resultId;
+      document.getElementById("resultId").value = resultId;
+      console.log(resultId);
+    };
+  });
+
+  span.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+</script>
 {% endblock %}

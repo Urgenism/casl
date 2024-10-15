@@ -80,8 +80,10 @@ def question(id):
 @role_required('student')
 def results():
     results = get_results_by_user_id(current_user.id)
-    print(results)
-    return render_template('results.html', user=current_user, results=results)
+    
+    base_template = 'dashboard-base.html'
+       
+    return render_template('results.html', user=current_user, results=results, base_template=base_template)
 
 
 @student.route('/users',  methods=['GET', 'POST'])
