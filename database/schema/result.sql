@@ -5,6 +5,6 @@ CREATE TABLE result (
     score INT NOT NULL,
     feedback TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_user_result FOREIGN KEY (id_user) REFERENCES users(id),
+    CONSTRAINT fk_user_result FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE,
     CONSTRAINT fk_game_result FOREIGN KEY (id_game) REFERENCES games(id) 
 );

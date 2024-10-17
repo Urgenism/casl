@@ -26,7 +26,7 @@ block title %}Users{% endblock %} {% block content %}
           {% if user.active == 1 %} <span style="color: green"> Active</span> {%
           else %} <span style="color: red">Inactive</span> {% endif %}
         </td>
-        <td>
+        <td style="min-width: 310px">
           {% if user.role != 'admin' %}
           <form action="" method="post">
             <input type="hidden" name="user_id" value="{{ user.id }}" />
